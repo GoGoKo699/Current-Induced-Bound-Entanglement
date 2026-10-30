@@ -1,0 +1,23 @@
+# Current-Induced Bound Entanglement
+
+Purpose: understand the all-time reversible PPT/entanglement-breaking equivalence and the circulating-qutrit counterfamily.
+
+Science route:
+- science/README.md: connected reading order and physical question.
+- science/model.md: resolved rank-one jumps; Hermitian diagonal dephasing; column convention; output-first Choi normalization; exact theorem and onset definitions.
+- science/reversible_proof.md: nonnegative Gaussian Gram factors, stationary-distribution tilt, diagonal twirl and nonnegative residual.
+- science/cycle.md: matched outgoing rates and damping; circulation; exact PPT/realignment expressions; strict interval and weak-current law.
+- science/operational.md: two-qubit projection and adaptive PPT converse for the sign of two-way assisted quantum capacity.
+- science/limitations.md: unresolved sectors, infinite-onset examples, unsupported exact biased EB time and lifetime claims.
+
+Learning route:
+- learning/README.md and learning/TUTORIAL.md: physical explanation and worked qutrit example.
+- learning/ANCHOR_BRIDGE.md: one Rivas–Huelga anchor; book/preprint numbering and missing entanglement steps.
+- learning/MILESTONES.md: exactly M01–M30; 12 background and 18 innovation targets, with dependencies and sources.
+
+Attribution and checks:
+- references/RELATED_WORK.md and references/references.bib: imported results, nearest dynamical/static comparators and bounded literature coverage.
+- verification/README.md, check_science.py, results.json: independent GKSL/Choi computation, reversible test family and high-precision limits.
+- verification/check_structure.py: local navigation and milestone integrity; not proof or hosted-rendering verification.
+
+Essential distinctions: J has trace d; rho=J/d has trace one. PPT is not generally separability. Realignment <=1 does not prove separability. The full complex population spectrum is not fixed by fixing singular values. Q2 denotes two-way-assisted quantum capacity, not private or unassisted capacity. The exact biased EB onset is not proved. Numerical tests are finite evidence, not universal proof. No personal coaching data are required to read or use this repository.

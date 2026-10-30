@@ -1,18 +1,35 @@
-# Capacity meaning of the PPT transition
+# What ends at the PPT threshold?
 
-For a channel in the [resolved-transition class](model.md), the partial transpose of its normalized Choi matrix contains, for each unordered `i,j`, a block
+The operational task is quantum communication with unlimited two-way classical communication and independent uses of a fixed channel, starting without shared entanglement. Write its capacity as $`Q_2(\Phi)`$. We establish only whether it vanishes, not its rate.
+
+## A failed PPT block gives distillable entanglement
+
+Prepare $`|\Omega_d\rangle`$ locally and send one half through the channel. This creates its normalized Choi state. If the channel is non-PPT in the [resolved-transition class](model.md), there is a pair $`i\lt j`$ for which $`c_{ij}^2>P_{ij}P_{ji}`$.
+
+Both parties project locally onto $`\operatorname{span}\{|i\rangle,|j\rangle\}`$. The success probability is
+
 ```math
-\frac1d\begin{pmatrix}P_{ij}&c_{ij}\\c_{ij}&P_{ji}\end{pmatrix}.
+s_{ij}=\frac{P_{ii}+P_{ij}+P_{ji}+P_{jj}}d>0.
 ```
-If `c_ij²>P_ij P_ji`, project both Choi subsystems locally onto `span{|i>,|j>}`. This postselected two-qubit state retains a negative partial-transpose block and has positive success probability. All two-qubit NPT states are distillable, hence independent uses of the channel and two-way LOCC yield a strictly positive asymptotic entanglement rate. Thus `Q_2(Phi)>0`.
 
-Conversely, PPT of the Choi matrix is equivalent to complete positivity of `T o Phi`. Under a two-way assisted protocol beginning with no shared entanglement, a PPT channel preserves PPT across the sender/receiver partition, including adaptive local operations and classical communication. A maximally entangled output cannot be approached at positive asymptotic rate. Consequently
+The retained two-qubit state's partial transpose still contains the negative determinant block. Every entangled two-qubit state is distillable, a prior theorem identified in [related work](../references/RELATED_WORK.md). Repeating the successful projection on independent channel uses and distilling gives a positive asymptotic entanglement rate, and teleportation converts it into quantum transmission. Therefore $`Q_2(\Phi)>0`$. No lower bound uniform near the threshold is asserted.
+
+## PPT channels cannot distribute distillable entanglement
+
+A PPT Choi matrix is equivalent to complete positivity of $`T\circ\Phi`$, where $`T`$ transposes the receiver output. In an adaptive protocol, transpose the receiver's previously held systems. A channel use then acts by the completely positive map $`T\circ\Phi`$ on the newly received system, preserving positivity across the sender-receiver cut. Local operations and classical communication also preserve the PPT property, branch by branch.
+
+Thus every final shared state is PPT. Its overlap with a maximally entangled state of Schmidt rank $`M`$ is at most $`1/M`$: partial transposition changes that target projector into the swap divided by $`M`$, whose largest eigenvalue is $`1/M`$. A positive-rate maximally entangled target cannot be approached. Hence $`Q_2(\Phi)=0`$.
+
+Together these arguments give, for this structured class,
+
 ```math
-Q_2(\Phi)>0\ \Longleftrightarrow\ \Phi\text{ is not PPT},\qquad
-Q_2(\Phi)=0\ \Longleftrightarrow\ \Phi\text{ is PPT}.
+Q_2(\Phi)>0\quad\Longleftrightarrow\quad\Phi\text{ is non-PPT},
+\qquad
+Q_2(\Phi)=0\quad\Longleftrightarrow\quad\Phi\text{ is PPT}.
 ```
-This equivalence relies on the **special block structure** for the forward direction and is not a claim that all NPT Choi states of arbitrary channels are distillable. In a semigroup, PPT and EB properties persist under subsequent channel composition, so the onsets are well-defined extended-real thresholds.
 
-Under detailed balance, the reversible theorem further gives `t_PPT=t_EB`. The biased qutrit supplies `t_PPT<t_EB`: an interval with no two-way quantum communication but residual **bound** Choi entanglement.
+## What this does and does not imply
 
-No numerical capacity, uniformly positive lower bound near the threshold, private capacity, key rate, or unassisted quantum-capacity statement is established.
+For a semigroup, later composition preserves PPT and EB. Detailed balance therefore makes the zero-capacity threshold coincide with universal separability. The circulating qutrit instead has a nonempty interval with zero two-way assisted quantum capacity and entangled Choi state.
+
+The non-PPT implication relies on the special two-dimensional projection, not on an assertion that all non-PPT states in arbitrary dimensions are distillable. A channel-level theorem is also different from the evolution of one chosen mixed entangled input. No unassisted, one-way, private, or secret-key capacity is computed. In particular, PPT nondistillability alone must not be read as a universal zero-private-key statement.
