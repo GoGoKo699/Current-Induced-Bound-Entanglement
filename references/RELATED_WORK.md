@@ -1,18 +1,43 @@
-# Prior work and claim subtraction
+# Related work and attribution
 
-The following existing results provide essential ingredients; they are **not** claimed as new.
+The result uses established channel, entanglement and matrix-cone machinery. Its proposed contribution is a dynamical statement: an all-time reversibility boundary in a specified resolved-transition model, a matched arbitrary-small-current counterfamily, and the operational meaning of the PPT onset. Neither a new static PPT-entangled state nor a new separability criterion is claimed.
 
-- Johnston and MacLean, *Pairwise Completely Positive Matrices and Conjugate Local Diagonal Unitary Invariant Quantum States*, Electronic Journal of Linear Algebra 35 (2019), [arXiv:1807.06897](https://arxiv.org/abs/1807.06897). PCP/CLDUI correspondence, completely positive nonnegative-factorizations, and comparison-matrix sufficient separability tests.
-- Singh and Nechita, *Diagonal unitary and orthogonal symmetries in quantum theory*, Quantum **5**, 519 (2021), [arXiv:2010.07898](https://arxiv.org/abs/2010.07898). Theorems 2.8–2.9: the CP(A)/PCP correspondence and separability of CLDUI states; Lemma 2.12 and surrounding material: standard PPT and realignment tests.
-- Roga, Fannes and Życzkowski, *Davies maps for qubits and qutrits*, Reports on Mathematical Physics **67** (2011), [arXiv:0911.5607](https://arxiv.org/abs/0911.5607). Resolved-transition Davies-style structure and detailed-balanced populations; arbitrary Davies generators need not share the exact present model.
-- Hanson, Rouzé and Stilck França, *Eventually Entanglement Breaking Markovian Dynamics: Structure and Characteristic Times*, Annales Henri Poincaré **21** (2020), [arXiv:1902.08173](https://arxiv.org/abs/1902.08173). Eventual entanglement-breaking of primitive finite-dimensional semigroups, but no identified all-time reversible PPT=EB characterization.
-- Szczygielski and Chruściński, *Eventually entanglement breaking divisible quantum dynamics*, Journal of Physics A **57** (2024), [arXiv:2407.16583](https://arxiv.org/abs/2407.16583). Related diagonal generator, eventual EB under appropriate full-rank conditions; no located exact equality of PPT and EB thresholds.
-- Horodecki, Horodecki and Horodecki, *Inseparable Two Spin-1/2 Density Matrices Can Be Distilled to a Singlet Form*, PRL **78** (1997), [arXiv:quant-ph/9607009](https://arxiv.org/abs/quant-ph/9607009); and *Mixed-State Entanglement and Distillation*, PRL **80** (1998), [arXiv:quant-ph/9801069](https://arxiv.org/abs/quant-ph/9801069). Standard two-qubit distillability and PPT nondistillability.
-- Singh, Datta and Nechita, *Ergodic theory of diagonal orthogonal covariant quantum channels*, Letters in Mathematical Physics **114** (2024), [arXiv:2206.01145](https://arxiv.org/abs/2206.01145). Structure/ergodicity comparators.
-- Duvenhage and Snyman, *Detailed balance and entanglement*, Journal of Physics A **48** (2015), [arXiv:1407.0520](https://arxiv.org/abs/1407.0520). Modular/detailed-balance relations, not the channel EB/PPT threshold claim.
+## Imported ingredients
 
-**Recent qutrit comparators.** The exploration independently examined 2026 Ali's qutrit cyclic bound-entanglement witness and Sacchi's 2026 bistochastic qutrit channel model ([arXiv:2607.12470v2](https://arxiv.org/abs/2607.12470v2)). Ali's positive map does not detect the arbitrarily weak-current window near the reversible crossing; Sacchi's singular coherence-erasing channel slice is not a finite-time exponential of the present full-rank semigroup. See the private exploration audit for source equations and checked versions. These are limited comparisons, not an exhaustive priority certificate.
+| Ingredient | Primary source | Use here |
+|---|---|---|
+| Separable Choi state iff entanglement-breaking channel | Horodecki, Shor and Ruskai, [quant-ph/0302031](https://arxiv.org/abs/quant-ph/0302031) | Converts separability into an all-input statement |
+| Pairwise completely positive matrices and diagonal-unitary-invariant states | Johnston and MacLean, [1807.06897](https://arxiv.org/abs/1807.06897); Singh and Nechita, [2010.07898](https://arxiv.org/abs/2010.07898) | Nonnegative factors, product-state twirling, structured PPT tests |
+| Realignment separability criterion | Chen and Wu, [quant-ph/0205017](https://arxiv.org/abs/quant-ph/0205017) | Certifies entanglement when the normalized trace norm exceeds one |
+| Distillability of entangled two-qubit states | Horodecki, Horodecki and Horodecki, [quant-ph/9607009](https://arxiv.org/abs/quant-ph/9607009) | Converts a negative pair block into positive two-way capacity |
+| PPT nondistillability | Horodecki, Horodecki and Horodecki, [quant-ph/9801069](https://arxiv.org/abs/quant-ph/9801069) | Bound-entanglement interpretation and PPT protocol converse |
 
-**Related internal projects, read-only novelty review.** `Nonlinear-Diffusion-Entanglement` (pinned main `9c0ee02e018cf6940bcbb7916a666495331e8852`) treats continuous-variable random-unitary diffusion and approximate versus exact EB. `Spin-Diffusion-Classicalization` (`48547a557c0a1ce0ef54f3d251824ff80d0f46ca`) treats dynamical spin classicalization; `Quantum-Mixing-Depth` (`e059785fc822cb7701e12bffb97b60b95738aa3c`) addresses mixing depth. The studied models/tasks differ; no result has been imported by implication.
+The complete positivity of a matrix with nonnegative Gram factors is a matrix-cone property, not a second use of the quantum-channel definition. The reversible proof explicitly constructs the required product decomposition; it does not assume that an arbitrary positive matrix has nonnegative factors.
 
-**Consequential remainder after subtraction.** A constructive *all-time* reversibility theorem for resolved-transition semigroups, paired with a full qutrit semigroup in which an arbitrarily weak current opens a bound-entangled channel window at matched contraction scales, and an exact two-way quantum-capacity sign threshold within this structured channel class. It is not merely a new static PPT-entangled state, a novel separability test, or a universal non-equilibrium principle.
+## Nearest dynamical comparisons
+
+Roga, Fannes and Życzkowski, [Davies maps for qubits and qutrits](https://arxiv.org/abs/0911.5607), provide an important structural comparison. Our independently resolved jumps are explicit hypotheses. A generic Davies generator with unresolved degenerate-frequency sectors need not have this Choi structure.
+
+Hanson, Rouzé and Stilck França, [1902.08173](https://arxiv.org/abs/1902.08173), characterize eventual entanglement breaking in Markovian dynamics. Szczygielski and Chruściński, [2407.16583v2](https://arxiv.org/abs/2407.16583v2), study eventual EB and divisibility, including related diagonal models. Eventual EB establishes late-time behavior; it does not by itself identify the **first PPT time** with the first EB time. The latter equality, proved constructively at every time under the present hypotheses, is the relevant distinction.
+
+Duvenhage and Snyman, [Detailed balance and entanglement](https://arxiv.org/abs/1407.0520), concern detailed-balance dualities and entangled-state formulations. Singh, Datta and Nechita, [2206.01145](https://arxiv.org/abs/2206.01145), study ergodicity of diagonal orthogonal covariant channels. Shared structure or terminology does not substitute for a threshold theorem under the same assumptions.
+
+## Circulant, Weyl and chosen-input precedents
+
+Chruściński and Kossakowski, [0705.3534](https://arxiv.org/abs/0705.3534), supply static circulant-state structure. Shahbeigi and coauthors, [2003.12184](https://arxiv.org/abs/2003.12184), establish Weyl-channel semigroup embeddability and Fourier structure in a containing class. These constructions and spectral methods are inherited; embedding a static state in a named family alone is not the contribution.
+
+Song, Chen and Zhu, [0904.4847](https://arxiv.org/abs/0904.4847), study loss of distillability under local decoherence for chosen mixed entangled inputs. Such a free-to-bound transition can occur without contradicting an all-input channel theorem: the channel can remain non-PPT while that particular input has become bound entangled. Here the path starts at the identity channel and is tested by its Choi state.
+
+## Recent qutrit comparisons and limits of the search
+
+Sacchi's [sparse anisotropic positive maps](https://arxiv.org/abs/2607.12470), published in Physical Review A 114, 042455 (2026), retain selected coherence sectors and erase another. The uniform completely positive slice is a different, singular channel family, whereas a finite-time matrix exponential is invertible as a linear map. Its sparse edge-state geometry does not identify the present semigroup's biased EB time.
+
+The exploration also compared Ali's [2609.39141v1](https://arxiv.org/abs/2609.39141v1) against the full-rank cyclic Choi family: the recorded comparison identifies an extra diagonal component in our state and failure of the proposed positive-map witness near the weak-current crossing. A fresh full-text retrieval of that source was unavailable during furnishing, so that comparison remains an explicitly carried-forward, bounded exploration observation rather than a new full-text verification. Neither source supplies a premise used by the present proofs.
+
+The targeted comparison covers the inherited ingredients and nearby dynamical/static models; it is not an exhaustive priority certificate. The full author preprint of the Weyl-channel work was inspected in exploration, not its unavailable published PDF. The exact biased EB onset is not credited as a result.
+
+## What remains after subtraction
+
+The all-time resolved-transition reversibility theorem uses known cone technology to make PPT sufficient for EB. The qutrit family shows that every nonzero circulation bias can separate those properties while preserving specified damping diagnostics. The special pair-block structure gives an exact positive-versus-zero two-way-capacity boundary without assuming arbitrary NPT distillability. These are the claims to compare, rather than the novelty of their static tests or notation.
+
+The selected [Rivas–Huelga educational anchor](../learning/ANCHOR_BRIDGE.md) supports entry into the dynamics; the primary research references above remain necessary for attribution. The [structured bibliography](references.bib) records stable source identifiers.

@@ -1,25 +1,72 @@
 # Current-Induced Bound Entanglement
 
-**Physical question.** When does a memoryless quantum evolution cease to distribute distillable entanglement, and when does it destroy *all* entanglement? Can microscopic probability currents separate these transitions without changing the relaxation rates?
+**When does memoryless noise stop distributing distillable entanglement, and when does it destroy all entanglement?** In a resolved-transition Lindblad model, detailed balance makes these thresholds coincide. A circulating three-level system separates them even when coherence attenuation and population contraction singular values are held fixed.
 
-For finite-dimensional resolved-transition Lindblad dynamics with diagonal Hamiltonian and Hermitian diagonal dephasing, **classical detailed balance forces the PPT and entanglement-breaking (EB) channel thresholds to coincide at every time**. A three-state cycle with arbitrary nonzero circulation breaks that equality: at fixed coherence attenuation and fixed singular values of the population propagator, a strictly PPT yet entangled Choi state appears during a nonempty time interval. This is a loss of distillability, **not** an improvement in quantum communication or proof of longer entanglement lifetime.
+## Main results
 
-## Results
+**Reversibility.** For a finite system with separate rank-one population-transition jumps, diagonal Hamiltonian, Hermitian diagonal dephasing, and a faithful detailed-balance distribution,
 
-1. **Reversible theorem.** If the classical population generator has a faithful detailed-balance distribution, the channel is PPT if and only if it is EB, for every finite time, including reducible cases where both thresholds may remain infinite. [Model and theorem](science/model.md), [separable decomposition](science/reversible_proof.md).
-2. **Current-driven counterfamily.** For a qutrit cycle with normalized clockwise/counterclockwise rates and bias `eta`, every `eta != 0` admits a PPT-entangled time window when uniform dephasing `0 <= gamma <= 1/2`. The current-free onset is `t* = 1.26188944840409...` for `gamma=0`; the opening at small bias is `t* - t_PPT = 0.0391427404381 eta^2 + O(eta^4)`. [Cycle derivation](science/cycle.md).
-3. **Operational distinction.** For the entire structured Choi class, a non-PPT channel has a distillable two-qubit projection, while a PPT channel has zero two-way assisted quantum capacity. Thus the PPT onset is exactly the sign threshold of two-way-assisted quantum capacity, though no capacity value or useful rate is computed. [Communication interpretation](science/operational.md).
+```math
+\Phi_t\text{ is PPT}\quad\Longleftrightarrow\quad
+\Phi_t\text{ is entanglement breaking}.
+```
 
-## Read and verify
+This holds at every finite time. The [constructive proof](science/reversible_proof.md) gives a separable Choi decomposition. The equivalence does not require irreducibility; both onset times can be infinite in disconnected models.
 
-- [Science route](science/README.md) leads to exact model, proofs, cycle, operational meaning and boundaries.
-- [Related work](references/RELATED_WORK.md) separates inherited PCP/CLDUI separability techniques and PPT/realignment witnesses from the dynamical contribution.
-- [Reproduction](verification/README.md) describes the independent full-Lindblad audit and its limits.
-- The selected educational source and project-defined 30 milestones will be integrated **after the author selects the anchor**; no coaching records belong here.
+**Circulation.** A qutrit cycle with forward/backward rates $`a,b`$, bias $`\eta=(a-b)/(a+b)`$, and dimensionless uniform dephasing $`\gamma`$ obeys
 
-## Boundaries
+```math
+t_{\rm PPT}(\eta,\gamma)\lt t_*(\gamma)\le t_{\rm EB}(\eta,\gamma)
+\qquad(0\lt|\eta|\le1,\ 0\le\gamma\le1/2).
+```
 
-The result does not cover generic Davies generators with unresolved degenerate Bohr-frequency sectors, non-Hermitian diagonal dissipators, arbitrary population graphs under circulation, or a proved exact EB time in the biased cycle. A PPT-entangled Choi state is bound entangled and has no two-way distillable entanglement, but this result does not determine private capacity, unassisted capacity or secure-key rates. The reversible theorem uses established matrix-cone technology; novelty rests on the all-time dynamical consequence and its matched current-driven contrast.
+Here $`t_*`$ is the exact common threshold of the current-free reference. Every nonzero bias opens a **PPT-entangled Choi interval**, certified by realignment. The [cycle analysis](science/cycle.md) holds the outgoing rate, coherence attenuation and population singular-value decay fixed; the full complex spectrum is not fixed.
+
+**Communication meaning.** In the whole structured Choi class, non-PPT implies a distillable local two-qubit projection. Therefore the PPT onset is exactly the positive-to-zero boundary of two-way assisted quantum capacity. This [capacity-sign result](science/operational.md) is not a capacity formula.
+
+## A concrete scale
+
+With no additional dephasing and time measured in units of $`(a+b)^{-1}`$,
+
+```math
+\begin{aligned}
+t_*&=1.26188944840409\ldots,\\
+t_*-t_{\rm PPT}&=0.0391427404380864\ldots\,\eta^2+O(\eta^4).
+\end{aligned}
+```
+
+For maximal bias at time $`1.25`$, the Choi partial transpose has minimum eigenvalue $`0.0041234967\ldots>0`$ while the realignment norm is $`1.0085795716\ldots>1`$. Entanglement survives, but it is bound rather than distillable.
+
+## Reading routes
+
+| Question | Route |
+|---|---|
+| What is the exact model, normalization and theorem? | [Model](science/model.md) |
+| Why does detailed balance make PPT sufficient? | [Reversible proof](science/reversible_proof.md) |
+| How does the stationary current create the contrasting interval? | [Cycle and weak-bias law](science/cycle.md) |
+| Which operational capability ends? | [Two-way communication](science/operational.md) |
+| Which claims do not follow? | [Scope and limiting examples](science/limitations.md) |
+| What is inherited from earlier work? | [Related work](references/RELATED_WORK.md), [bibliography](references/references.bib) |
+
+The [science entrypoint](science/README.md) connects these pages. [llms.txt](llms.txt) maps questions to authoritative files.
+
+## Learning route
+
+The single educational anchor is **Rivas–Huelga, Open Quantum Systems: An Introduction**. The [source bridge](learning/ANCHOR_BRIDGE.md) pairs book chapters with the open preprint's different section numbering and supplies the specialized entanglement bridge. Start with the [worked tutorial](learning/TUTORIAL.md) and [30-milestone map](learning/MILESTONES.md): 12 background/preliminaries targets followed by 18 narrative/innovation targets. The map is shared scientific material, not a personal assessment record.
+
+## Reproduce
+
+```bash
+python -m pip install -r verification/requirements.txt
+python verification/check_science.py
+python verification/check_structure.py
+```
+
+The [verification guide](verification/README.md) explains full-superoperator comparisons, reversible Gram/decomposition checks, a disconnected example, and high-precision weak-bias tests. The [recorded results](verification/results.json) distinguish finite computation from analytical proof.
+
+## Scope
+
+This is not a theorem about arbitrary Davies or Lindblad generators, arbitrary population graphs with currents, or all definitions of quantum detailed balance. The exact biased entanglement-breaking time remains undetermined. The effect establishes earlier loss of distillability with residual bound entanglement, **not** a demonstrated increase in total entanglement lifetime or a useful storage advantage. Necessary matrix-cone, separability, realignment and distillation results are attributed to prior work.
 
 ## Purpose
 

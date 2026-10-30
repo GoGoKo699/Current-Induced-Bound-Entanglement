@@ -1,0 +1,64 @@
+name: Verification
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  science:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python -m pip install -r verification/requirements.txt
+      - run: python verification/check_science.py
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+      - run: python verification/check_structure.py
+  hosted:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install read-only browser dependencies
+        run: |
+          npm install --prefix "$RUNNER_TEMP/browser-deps" playwright@1.56.1 mathjax-full@3.2.1
+          "$RUNNER_TEMP/browser-deps/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Compare all hosted mathematics with pinned source
+        env:
+          SOURCE_REVISION: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          export NODE_PATH="$RUNNER_TEMP/browser-deps/node_modules"
+          python3 verification/hosted/build_contract.py --revision "$SOURCE_REVISION" --output "$RUNNER_TEMP/math-contract.json"
+          node verification/hosted/capture_hosted_math.cjs \
+            --root "$GITHUB_WORKSPACE" --repository "$GITHUB_REPOSITORY" \
+            --revision "$SOURCE_REVISION" --output "$RUNNER_TEMP/hosted-evidence" \
+            --contract "$RUNNER_TEMP/math-contract.json"
+      - name: Retain exact source and diagnostic report
+        if: always()
+        run: |
+          mkdir -p "$RUNNER_TEMP/hosted-evidence"
+          git archive --format=tar.gz --output "$RUNNER_TEMP/hosted-evidence/source.tar.gz" HEAD
+          if test -f "$RUNNER_TEMP/hosted-evidence/hosted-report.json"; then cat "$RUNNER_TEMP/hosted-evidence/hosted-report.json"; fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hosted-math-${{ github.event.pull_request.head.sha || github.sha }}
+          path: ${{ runner.temp }}/hosted-evidence
+          if-no-files-found: error
+          retention-days: 7
