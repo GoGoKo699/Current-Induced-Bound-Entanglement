@@ -8,10 +8,10 @@
 
 ```math
 \Phi_t\text{ is PPT}\quad\Longleftrightarrow\quad
-\Phi_t\text{ is entanglement breaking}\qquad\text{for every finite }t.
+\Phi_t\text{ is entanglement breaking}.
 ```
 
-The [constructive proof](science/reversible_proof.md) gives a separable Choi decomposition. The equivalence does not require irreducibility; both onset times can be infinite in disconnected models.
+This holds at every finite time. The [constructive proof](science/reversible_proof.md) gives a separable Choi decomposition. The equivalence does not require irreducibility; both onset times can be infinite in disconnected models.
 
 **Circulation.** A qutrit cycle with forward/backward rates $`a,b`$, bias $`\eta=(a-b)/(a+b)`$, and dimensionless uniform dephasing $`\gamma`$ obeys
 
@@ -29,8 +29,10 @@ Here $`t_*`$ is the exact common threshold of the current-free reference. Every 
 With no additional dephasing and time measured in units of $`(a+b)^{-1}`$,
 
 ```math
-t_*=1.26188944840409\ldots,\qquad
-t_*-t_{\rm PPT}=0.0391427404380864\ldots\,\eta^2+O(\eta^4).
+\begin{aligned}
+t_*&=1.26188944840409\ldots,\\
+t_*-t_{\rm PPT}&=0.0391427404380864\ldots\,\eta^2+O(\eta^4).
+\end{aligned}
 ```
 
 For maximal bias at time $`1.25`$, the Choi partial transpose has minimum eigenvalue $`0.0041234967\ldots>0`$ while the realignment norm is $`1.0085795716\ldots>1`$. Entanglement survives, but it is bound rather than distillable.

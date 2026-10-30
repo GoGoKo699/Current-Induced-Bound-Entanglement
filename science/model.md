@@ -19,9 +19,10 @@ Here $`H`$ and every $`V_\alpha`$ are Hermitian and diagonal. Distinct transitio
 Applying the generator to matrix units gives the population propagator $`P(t)=e^{tQ}`$ and, for $`i\ne j`$,
 
 ```math
-\Phi_t(E_{ij})=e^{-it(H_{ii}-H_{jj})}c_{ij}(t)E_{ij},
-\qquad
-c_{ij}(t)=\exp\!\left[-\frac t2(q_i+q_j)-\frac t2\|v_i-v_j\|^2\right].
+\begin{aligned}
+\Phi_t(E_{ij})&=e^{-it(H_{ii}-H_{jj})}c_{ij}(t)E_{ij},\\
+c_{ij}(t)&=\exp\!\left[-\frac t2(q_i+q_j)-\frac t2\|v_i-v_j\|^2\right].
+\end{aligned}
 ```
 
 A diagonal output unitary removes all Hamiltonian phases. This changes neither separability nor positivity of a partial transpose. We use that phase-removed form below. The resolved transition model, rather than a general weak-coupling derivation, is the hypothesis of the theorem.

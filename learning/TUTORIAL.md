@@ -45,8 +45,10 @@ Thus $`R>1`$ proves entanglement. A value at or below one does **not** by itself
 Take maximal clockwise bias, $`\eta=1`$, no extra dephasing, and $`t=1.25`$. The independent full-generator calculation gives
 
 ```math
-D_1(1.25)=0.0075006931\ldots>0,
-\qquad R(1.25)=1.0085795716\ldots>1.
+\begin{aligned}
+D_1(1.25)&=0.0075006931\ldots>0,\\
+R(1.25)&=1.0085795716\ldots>1.
+\end{aligned}
 ```
 
 The smallest eigenvalue of the normalized Choi partial transpose is $`0.0041234967\ldots`$, so this is not a sign decision made at numerical zero. The state is simultaneously PPT and entangled: it is bound entangled, and the channel is not entanglement breaking even though its two-way quantum capacity is zero.

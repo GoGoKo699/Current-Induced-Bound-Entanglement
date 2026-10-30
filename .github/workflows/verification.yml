@@ -23,14 +23,15 @@ jobs:
         env:
           OPENBLAS_NUM_THREADS: '1'
       - run: python verification/check_structure.py
-  hosted-probe:
+  hosted:
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -38,46 +39,26 @@ jobs:
         run: |
           npm install --prefix "$RUNNER_TEMP/browser-deps" playwright@1.56.1 mathjax-full@3.2.1
           "$RUNNER_TEMP/browser-deps/node_modules/.bin/playwright" install --with-deps chromium
-      - name: Check anonymous hosted-page capability
+      - name: Compare all hosted mathematics with pinned source
         env:
           SOURCE_REVISION: ${{ github.event.pull_request.head.sha || github.sha }}
         run: |
           export NODE_PATH="$RUNNER_TEMP/browser-deps/node_modules"
-          mkdir -p "$RUNNER_TEMP/hosted-probe"
-          node <<'JS'
-          const {chromium}=require('playwright');
-          const fs=require('node:fs');
-          const path=require('node:path');
-          (async()=>{
-            const output=path.join(process.env.RUNNER_TEMP,'hosted-probe');
-            const browser=await chromium.launch({headless:true});
-            const url=`https://github.com/${process.env.GITHUB_REPOSITORY}/blob/${process.env.SOURCE_REVISION}/README.md`;
-            const observations=[];
-            try {
-              for(const width of [1440,760]) {
-                const context=await browser.newContext({viewport:{width,height:1000},colorScheme:'light'});
-                const page=await context.newPage();
-                const response=await page.goto(url,{waitUntil:'domcontentloaded',timeout:60000});
-                if(response.status()!==200 || page.url()!==url) throw new Error(`Hosted page unavailable: ${response.status()} ${page.url()}`);
-                const article=page.locator('article.markdown-body').first();
-                await article.waitFor({state:'visible',timeout:30000});
-                await page.waitForTimeout(1500);
-                const observation={url,revision:process.env.SOURCE_REVISION,width,math_hosts:await article.locator('math-renderer').count(),mathml:await article.locator('math').count()};
-                await page.screenshot({path:path.join(output,`readme-${width}.png`),fullPage:true});
-                fs.writeFileSync(path.join(output,`readme-${width}.html`),await page.content());
-                observations.push(observation);
-                await context.close();
-              }
-              const report={kind:'hosted-capability-probe',status:'pass',captured_at:new Date().toISOString(),observations,limits:'Capability probe only, not a source-to-host structural or visual-review verdict.'};
-              fs.writeFileSync(path.join(output,'probe.json'),JSON.stringify(report,null,2));
-              console.log(JSON.stringify(report));
-            } finally {await browser.close();}
-          })().catch(error=>{console.error(error);process.exitCode=1;});
-          JS
+          python3 verification/hosted/build_contract.py --revision "$SOURCE_REVISION" --output "$RUNNER_TEMP/math-contract.json"
+          node verification/hosted/capture_hosted_math.cjs \
+            --root "$GITHUB_WORKSPACE" --repository "$GITHUB_REPOSITORY" \
+            --revision "$SOURCE_REVISION" --output "$RUNNER_TEMP/hosted-evidence" \
+            --contract "$RUNNER_TEMP/math-contract.json"
+      - name: Retain exact source and diagnostic report
+        if: always()
+        run: |
+          mkdir -p "$RUNNER_TEMP/hosted-evidence"
+          git archive --format=tar.gz --output "$RUNNER_TEMP/hosted-evidence/source.tar.gz" HEAD
+          if test -f "$RUNNER_TEMP/hosted-evidence/hosted-report.json"; then cat "$RUNNER_TEMP/hosted-evidence/hosted-report.json"; fi
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: hosted-capability-${{ github.event.pull_request.head.sha || github.sha }}
-          path: ${{ runner.temp }}/hosted-probe
-          if-no-files-found: warn
+          name: hosted-math-${{ github.event.pull_request.head.sha || github.sha }}
+          path: ${{ runner.temp }}/hosted-evidence
+          if-no-files-found: error
           retention-days: 7

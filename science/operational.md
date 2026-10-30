@@ -23,9 +23,10 @@ Thus every final shared state is PPT. Its overlap with a maximally entangled sta
 Together these arguments give, for this structured class,
 
 ```math
-Q_2(\Phi)>0\quad\Longleftrightarrow\quad\Phi\text{ is non-PPT},
-\qquad
-Q_2(\Phi)=0\quad\Longleftrightarrow\quad\Phi\text{ is PPT}.
+\begin{aligned}
+Q_2(\Phi)>0&\quad\Longleftrightarrow\quad\Phi\text{ is non-PPT},\\
+Q_2(\Phi)=0&\quad\Longleftrightarrow\quad\Phi\text{ is PPT}.
+\end{aligned}
 ```
 
 ## What this does and does not imply

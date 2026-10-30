@@ -15,9 +15,10 @@ E=e^{-3t/2},\qquad \theta=\sqrt3\eta t/2,\qquad c=e^{-(1+\gamma)t}.
 The Fourier diagonalization of the population generator yields
 
 ```math
-P(t)=p_0I+p_1S+p_2S^2,
-\qquad
-p_m(t)=\frac{1+2E\cos(\theta-2\pi m/3)}3.
+\begin{aligned}
+P(t)&=p_0I+p_1S+p_2S^2,\\
+p_m(t)&=\frac{1+2E\cos(\theta-2\pi m/3)}3.
+\end{aligned}
 ```
 
 Its eigenvalues are $`1,Ee^{i\theta},Ee^{-i\theta}`$ and its singular values are $`1,E,E`$. Thus the bias changes oscillation phases, but not the singular-value contraction or coherence attenuation. The full eigenvalue spectrum is **not** held fixed.
@@ -79,9 +80,11 @@ D_0'(t_*)=\frac{(1-E_*)(E_*+2)}9>0.
 The implicit-function theorem then gives the first-onset shift
 
 ```math
-t_*-t_{\rm PPT}=K\eta^2+O(\eta^4),\qquad
-K=\frac{3E_*(1-4E_*)t_*^2}{4(1-E_*)(E_*+2)}
-=0.0391427404380864\ldots.
+\begin{aligned}
+t_*-t_{\rm PPT}&=K\eta^2+O(\eta^4),\\
+K&=\frac{3E_*(1-4E_*)t_*^2}{4(1-E_*)(E_*+2)}\\
+&=0.0391427404380864\ldots.
+\end{aligned}
 ```
 
 The even expansion reflects exchanging clockwise and counterclockwise rates. At the dephasing endpoint $`\gamma=1/2`$, the quadratic term vanishes and the opening is fourth order; the zero-dephasing coefficient must not be used there.
