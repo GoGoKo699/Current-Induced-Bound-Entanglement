@@ -6,13 +6,13 @@ import subprocess
 from check_rendered_math import expressions
 
 RULES = [
-    ('README.md', r'\Phi_t\text{ is PPT}', ['PPT', 'entanglement breaking', '⇔']),
+    ('README.md', r'\Phi_t\text{ is PPT}', ['PPT', 'entanglement breaking', '⟺']),
     ('README.md', r't_{\rm PPT}(\eta,\gamma)', ['PPT', 'EB', 'η', 'γ', '≤']),
     ('README.md', r't_*&=1.26188944840409', ['1.26188944840409', '0.0391427404380864', 'η']),
     ('science/model.md', r'\Phi_t(E_{ij})&=', ['Φ', 'c', 'exp', 'q']),
     ('science/cycle.md', r'P(t)&=p_0I', ['P', 'p', 'cos', 'θ', 'π']),
     ('science/cycle.md', r't_*-t_{\rm PPT}&=K', ['PPT', 'K', '0.0391427404380864', 'η']),
-    ('science/operational.md', r'Q_2(\Phi)>0&', ['Q2', 'non-PPT', 'PPT', '⇔']),
+    ('science/operational.md', r'Q_2(\Phi)>0&', ['Q2', 'non-PPT', 'PPT', '⟺']),
     ('learning/TUTORIAL.md', r'D_1(1.25)&=', ['0.0075006931', '1.0085795716', 'R']),
 ]
 

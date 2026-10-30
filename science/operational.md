@@ -6,7 +6,7 @@ The operational task is quantum communication with unlimited two-way classical c
 
 Prepare $`|\Omega_d\rangle`$ locally and send one half through the channel. This creates its normalized Choi state. If the channel is non-PPT in the [resolved-transition class](model.md), there is a pair $`i\lt j`$ for which $`c_{ij}^2>P_{ij}P_{ji}`$.
 
-Both parties project locally onto $`\operatorname{span}\{|i\rangle,|j\rangle\}`$. The success probability is
+Both parties project locally onto $`\mathrm{span}\{|i\rangle,|j\rangle\}`$. The success probability is
 
 ```math
 s_{ij}=\frac{P_{ii}+P_{ij}+P_{ji}+P_{jj}}d>0.
