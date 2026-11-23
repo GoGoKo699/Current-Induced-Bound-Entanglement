@@ -34,7 +34,7 @@ p_1p_2=\frac{1-2E\cos\theta+E^2(4\cos^2\theta-3)}9.
 For clarity, realignment sends the matrix element $`\rho_{ij,kl}`$ to the entry with row $`(i,k)`$ and column $`(j,l)`$. Applied to the normalized Choi state, it gives one block $`P/3`$ and six scalar blocks $`c/3`$. Its trace norm is therefore
 
 ```math
-R(t)=\|\mathcal R(\rho_t)\|_1=\frac{1+2E}3+2c.
+R(t)=\frac{1+2E}3+2c.
 ```
 
 ## Exact entanglement-breaking time

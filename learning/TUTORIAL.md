@@ -69,9 +69,9 @@ For each nonzero bias a unique critical dephasing rate $`\gamma_c(\eta)>1/2`$ de
 
 | Dephasing at nonzero bias | Thresholds | Entanglement between the two diagnostic crossings |
 |---|---|---|
-| $`\gamma<\gamma_c(\eta)`$ | $`t_{\rm PPT}<t_{\rm EB}=t_*`$ | Bound entanglement from $`t_{\rm PPT}`$ up to, but excluding, $`t_*`$ |
+| $`\gamma\lt\gamma_c(\eta)`$ | $`t_{\rm PPT}\lt t_{\rm EB}=t_*`$ | Bound entanglement from $`t_{\rm PPT}`$ up to, but excluding, $`t_*`$ |
 | $`\gamma=\gamma_c(\eta)`$ | $`t_{\rm PPT}=t_{\rm EB}=t_*`$ | No interval |
-| $`\gamma>\gamma_c(\eta)`$ | $`t_*<t_{\rm PPT}=t_{\rm EB}`$ | Distillable entanglement from $`t_*`$ up to, but excluding, $`t_{\rm PPT}`$ |
+| $`\gamma\gt\gamma_c(\eta)`$ | $`t_*\lt t_{\rm PPT}=t_{\rm EB}`$ | Distillable entanglement from $`t_*`$ up to, but excluding, $`t_{\rm PPT}`$ |
 
 Take maximal clockwise bias $`\eta=1`$. At zero dephasing, the biased channel becomes PPT at $`t_{\rm PPT}=1.2174450174\ldots`$ and becomes EB at $`t_*=1.2618894484\ldots`$. At $`t=1.25`$, an independent calculation of the full generator gives $`D_1=0.0075006931\ldots>0`$ and $`R=1.0085795716\ldots>1`$. The Choi state is PPT and entangled. The channel's two-way assisted quantum capacity is zero throughout this interval.
 
