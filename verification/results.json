@@ -1,7 +1,7 @@
 {
   "status": "pass",
   "environment": {
-    "python": "3.13.5",
+    "python": "3.12.14",
     "numpy": "2.3.5",
     "scipy": "1.17.0",
     "mpmath": "1.3.0"
@@ -39,6 +39,77 @@
       }
     ]
   },
+  "static_bell_slice": {
+    "cases_by_coherence_sign": {
+      "negative": 266,
+      "zero": 148,
+      "positive": 266
+    },
+    "outside_cases": {
+      "ppt": 78,
+      "realignment_with_ppt": 48
+    },
+    "max_reconstruction_error": 4.163516505653896e-16,
+    "minimum_diagonal_residual": -1.5265566588595902e-16
+  },
+  "exact_cycle_onsets": {
+    "regime_counts": {
+      "bound_interval": 18,
+      "coincident": 11,
+      "delayed": 24
+    },
+    "crossover": [
+      {
+        "eta": -1.0,
+        "critical_gamma": 0.7186185654238799
+      },
+      {
+        "eta": -0.5,
+        "critical_gamma": 0.5568993924197974
+      },
+      {
+        "eta": -0.1,
+        "critical_gamma": 0.5023090571594979
+      },
+      {
+        "eta": 0.1,
+        "critical_gamma": 0.5023090571594979
+      },
+      {
+        "eta": 0.5,
+        "critical_gamma": 0.5568993924197974
+      },
+      {
+        "eta": 1.0,
+        "critical_gamma": 0.7186185654238799
+      }
+    ],
+    "examples": [
+      {
+        "eta": 1.0,
+        "gamma": 0.0,
+        "t_star": 1.2618894484040917,
+        "t_ppt": 1.2174450174208429,
+        "t_eb": 1.2618894484040917
+      },
+      {
+        "eta": 1.0,
+        "gamma": 0.5,
+        "t_star": 0.9241962407465937,
+        "t_ppt": 0.9150886146924394,
+        "t_eb": 0.9241962407465937
+      },
+      {
+        "eta": 1.0,
+        "gamma": 1.0,
+        "t_star": 0.7467471159320636,
+        "t_ppt": 0.7552131477992756,
+        "t_eb": 0.7552131477992756
+      }
+    ],
+    "max_reconstruction_error": 2.7755575615628914e-16,
+    "minimum_diagonal_residual": -1.6930901125533637e-15
+  },
   "reversible": {
     "cases": 36,
     "max_choi_error": 1.3773704399255848e-15,
@@ -55,5 +126,5 @@
     "endpoint_quartic_coefficient": "0.0113992641275596766364196403835956924206575946942484357420324344314601",
     "measured_endpoint_gap_over_eta_fourth": "0.01139926412731626282279631550446825974526638389645833116380399573928989"
   },
-  "limits": "Finite-dimensional numerical checks and high-precision expansions; not a universal proof or separability decision algorithm."
+  "limits": "Finite decomposition, threshold, and high-precision checks support the analytical proofs in science/."
 }

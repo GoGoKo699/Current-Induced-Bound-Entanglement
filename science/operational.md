@@ -31,6 +31,6 @@ Q_2(\Phi)=0&\quad\Longleftrightarrow\quad\Phi\text{ is PPT}.
 
 ## What this does and does not imply
 
-For a semigroup, later composition preserves PPT and EB. Detailed balance therefore makes the zero-capacity threshold coincide with universal separability. The circulating qutrit instead has a nonempty interval with zero two-way assisted quantum capacity and entangled Choi state.
+For a semigroup, later composition preserves PPT and EB. Detailed balance therefore makes the zero-capacity threshold coincide with universal separability. Below the [critical dephasing rate](cycle.md#critical-dephasing), the biased qutrit has an exact interval with zero two-way assisted capacity and an entangled Choi state. Above that rate, the sign change and entanglement-breaking onset coincide, and both occur later than in the matched reversible cycle.
 
 The non-PPT implication relies on the special two-dimensional projection, not on an assertion that all non-PPT states in arbitrary dimensions are distillable. A channel-level theorem is also different from the evolution of one chosen mixed entangled input. No unassisted, one-way, private, or secret-key capacity is computed. In particular, PPT nondistillability alone must not be read as a universal zero-private-key statement.

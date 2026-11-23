@@ -1,4 +1,4 @@
-# Circulation separates two entanglement-loss thresholds
+# Exact entanglement lifetimes under circulation
 
 ## A matched three-level family
 
@@ -37,29 +37,45 @@ For clarity, realignment sends the matrix element $`\rho_{ij,kl}`$ to the entry 
 R(t)=\|\mathcal R(\rho_t)\|_1=\frac{1+2E}3+2c.
 ```
 
-The standard realignment criterion says that $`R>1`$ certifies entanglement. The converse is not generally valid. This witness, like the population singular values, is bias independent.
+## Exact entanglement-breaking time
 
-Let $`t_*`$ be the unique solution of $`E+3c=1`$. Existence and uniqueness follow because the left side decreases continuously from four to zero. At zero bias, $`p_1=p_2=(1-E)/3`$, so $`t_*`$ is precisely the PPT onset and, by [reversibility](reversible_proof.md), the EB onset.
+The [cyclic-state separability criterion](separability.md) says that this Choi state is separable exactly when it is PPT and $`R(t)\le1`$. Define $`t_{\rm PPT}`$ as the first time $`p_1p_2=c^2`$ and $`t_*(\gamma)`$ as the unique solution of $`E+3c=1`$.
 
-## Every nonzero bias opens an interval
-
-At the same time $`t_*`$, the difference between biased and unbiased PPT determinants is
+Both crossing times are unique. The realignment norm decreases strictly. For the PPT test, in these time units the cyclic master equation gives $`p'_m+p_m>0`$ at every positive time for $`m=1,2`$. All population probabilities are positive there, including for a cycle that runs only in one direction. Therefore $`p_m/c`$ increases strictly and $`p_1p_2/c^2`$ increases from zero to infinity. The exact time is
 
 ```math
-D_\eta(t_*)-D_0(t_*)=
+t_{\rm EB}(\eta,\gamma)=\max\{t_{\rm PPT}(\eta,\gamma),\,t_*(\gamma)\}.
+```
+
+At zero bias $`p_1=p_2=(1-E)/3`$, so $`t_{\rm PPT}=t_{\rm EB}=t_*`$. The positive-to-zero boundary for two-way assisted capacity occurs at $`t_{\rm PPT}`$ by the [distillable pair argument](operational.md).
+
+## Critical dephasing
+
+At the matched reversible time, substitution into the PPT determinant gives
+
+```math
+D_\eta(t_*)=
 \frac{2E_*(1-\cos\theta_*)[1-2E_*(1+\cos\theta_*)]}9.
 ```
 
-For $`0\le\gamma\le1/2`$, $`c\ge E`$, hence $`E_*\le1/4`$. Also $`0\lt t_*\le t_*(0)\lt1.27`$, so a nonzero bias has $`0\lt|\theta_*|\lt2\pi`$. Both factors in the numerator are strictly positive. At $`\gamma=1/2`$, the second bracket is $`(1-\cos\theta_*)/2`$, still positive.
-
-Consequently the biased channel is strictly PPT at $`t_*`$. By continuity it is PPT on an interval immediately below $`t_*`$, where $`R>1`$. Its Choi state is therefore entangled and PPT: **bound entangled**. Equivalently,
+For every nonzero bias, $`0\lt|\theta_*|\le\sqrt3\,t_*(0)/2\lt1.1`$. Only the last bracket can change sign. Along this interval of times, $`2e^{-3t/2}[1+\cos(\sqrt3\eta t/2)]`$ is strictly decreasing in $`t`$. As the dephasing rate increases from zero to infinity, $`t_*`$ decreases strictly from $`t_*(0)`$ toward zero. At $`\gamma=1/2`$, $`E_*=1/4`$ and the bracket is still strictly positive. These facts give one critical dephasing rate $`\gamma_c(\eta)>1/2`$ for each nonzero bias. Its defining equations are
 
 ```math
-t_{\rm PPT}(\eta,\gamma)\lt t_*(\gamma)\le t_{\rm EB}(\eta,\gamma)
-\qquad(0\lt|\eta|\le1,\ 0\le\gamma\le1/2).
+\begin{aligned}
+2e^{-3t_c/2}\bigl[1+\cos(\sqrt3\eta t_c/2)\bigr]&=1,\\
+\gamma_c(\eta)&=\frac1{t_c}\log\frac3{1-e^{-3t_c/2}}-1.
+\end{aligned}
 ```
 
-Semigroup composition preserves PPT, so the interval from its first onset up to $`t_*`$ is certified. The true biased EB time is not identified by the witness equality.
+| For nonzero bias | Ordering | Effect relative to the reversible channel |
+| --- | --- | --- |
+| Below critical dephasing | $`t_{\rm PPT}\lt t_{\rm EB}=t_*`$ | Distillability ends earlier. Total entanglement survives to the same time. |
+| At critical dephasing | $`t_{\rm PPT}=t_{\rm EB}=t_*`$ | The two lifetimes coincide with the reversible lifetime. |
+| Above critical dephasing | $`t_*\lt t_{\rm PPT}=t_{\rm EB}`$ | Distillable and total entanglement lifetimes are both longer. |
+
+A bound-entangled Choi interval exists exactly in the first row, from $`t_{\rm PPT}`$ inclusive to $`t_*`$ exclusive. At maximal bias, $`\gamma_c(1)=0.7186185654\ldots`$. For example, at $`\eta=1,\gamma=1`$, $`t_*=0.7467471159\ldots`$ and both biased thresholds are $`0.7552131478\ldots`$.
+
+Expanding the defining equation at $`\eta=0`$ gives $`\gamma_c(\eta)=1/2+(\log 4)\eta^2/6+O(\eta^4)`$. In detail, for $`t_0=(2/3)\log 4`$, the root is $`t_c=t_0-t_0^2\eta^2/8+O(\eta^4)`$. The derivative of the dephasing expression with respect to $`t_c`$ at $`t_0`$ is $`-2/t_0`$. At exactly zero bias the two onsets agree at every dephasing rate.
 
 ## Weak circulation without extra dephasing
 
@@ -93,4 +109,4 @@ For $`\eta=1,\gamma=0`$, $`t_{\rm PPT}=1.21744501742084\ldots`$. At $`t=1.25`$, 
 
 ## Physical conclusion
 
-Circulation makes the loss of two-way distillability occur earlier while some entanglement survives. It does not establish a longer total entanglement lifetime, a larger communication rate, or a useful quantum memory. The comparison isolates the direction of population flow from unchanged damping scales, within a particular finite-level Markovian model.
+The damping diagnostics alone leave both lifetime orderings possible. With weak dephasing the directed flow separates loss of distillability from loss of all entanglement. With stronger dephasing it delays both losses in the matched comparison. The result concerns the times at which these capabilities disappear. Near those times the positive two-way capacity can be small, and this analysis gives no rate estimate.

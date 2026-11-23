@@ -14,9 +14,9 @@ Pure finite-rate dephasing with no population transfer is another example: each 
 
 ## What circulation establishes
 
-The all-nonzero-bias claim is for the three-level cycle and the sufficient range of uniform dephasing from zero through one half in normalized rate units. It is not a universal theorem that every stationary current in every population graph creates bound entanglement. No assertion is made outside this proved range.
+In the resolved qutrit cycle, the [critical dephasing curve](cycle.md#critical-dephasing) controls the lifetime ordering at fixed total outgoing rate. Below the curve, the bound-entangled interval is exactly $`[t_{\rm PPT},t_*)`$. Above it, the current lengthens both the positive two-way-capacity regime and the total entanglement lifetime compared with the matched reversible cycle. The comparison leaves coherence damping and population singular values fixed while changing the population eigenphases.
 
-Realignment gives a certified interval ending at the reversible reference threshold. It does not locate the exact biased EB onset. The width shrinks to zero as the current vanishes; the fourth-order dephasing endpoint is particularly delicate numerically. No fixed experimental resolution, robust finite-rate advantage, or improved total storage lifetime is established.
+The joint sufficiency of PPT and realignment concerns the [three-parameter qutrit slice](separability.md) with equal real coherence. Other population graphs, nonuniform dephasing and unresolved coherent jump sums fall outside the circulating-cycle theorem. The result gives a capacity threshold. The size of the capacity near that threshold, finite-sample distinguishability of the two onsets, and a hardware memory comparison are separate questions.
 
 ## Evidence and interpretation
 

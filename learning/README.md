@@ -1,7 +1,7 @@
 # Learning route
 
-The selected anchor is **Rivas–Huelga, Open Quantum Systems: An Introduction**. Start with the [worked example](TUTORIAL.md), then the [source bridge](ANCHOR_BRIDGE.md) and [30-milestone map](MILESTONES.md). The bridge explicitly distinguishes the published book's chapter numbers from the open preprint's section numbers.
+The selected anchor is **Rivas–Huelga, Open Quantum Systems: An Introduction**. Start with the [worked tutorial](TUTORIAL.md) to follow a channel from distillable entanglement to separability. The [source bridge](ANCHOR_BRIDGE.md) gives the corresponding chapters in the book and sections in the open preprint. The [30-milestone map](MILESTONES.md) connects those foundations to the complete result.
 
-The map is intrinsic to the scientific project, not a personal assessment record. **M01–M12** assemble background from states and local noise to the global channel question. **M13–M30** connect the resolved dynamics, reversible proof, circulating counterfamily, and communication meaning. Both phases end in a synthesis rather than a new isolated ingredient.
+**M01–M12** assemble the background from states and local noise to the channel question. **M13–M30** connect the resolved dynamics, the reversible proof, the two-qutrit product decomposition, and the effect of dephasing on the circulation thresholds. The final milestones connect these results to the capacity of the channel to transmit quantum information with two-way classical assistance.
 
-Readers interested in exact statements can bypass the learning route and enter the [scientific account](../science/README.md). Necessary research citations remain in [related work](../references/RELATED_WORK.md); they are not additional educational anchors. This route contains no quizzes, answer keys, learner scores, or personal coaching instructions.
+For exact statements, see the [scientific account](../science/README.md) and its [research references](../references/RELATED_WORK.md).
