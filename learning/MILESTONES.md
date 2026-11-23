@@ -1,8 +1,8 @@
 # Thirty milestones
 
-This is the common project-defined understanding map. It contains **12 background/preliminaries milestones** and **18 narrative/innovation milestones**. The first phase progresses from individual states and noise operations to the channel-level question. The second joins local proof ingredients to the reversibility/current distinction and its operational meaning. This allocation follows the scientific story; it does not depend on a reader's assessed knowledge.
+The **12 background milestones** progress from individual states and noise operations to the channel-level question. The **18 narrative milestones** use the reversible proof, the two-qutrit separability criterion, and the critical-dephasing result to explain when circulation changes each threshold.
 
-Book and preprint references always mean the one selected **Rivas–Huelga** anchor; see the [edition map](ANCHOR_BRIDGE.md). The project supplies the specialized entanglement bridge and attributes research ingredients separately. No personal teaching or assessment procedure is part of this map.
+Book and preprint references use the same **Rivas–Huelga** anchor. See the [edition map](ANCHOR_BRIDGE.md) for the chapter and section numbers.
 
 ## Background/preliminaries
 
@@ -200,59 +200,59 @@ Book and preprint references always mean the one selected **Rivas–Huelga** anc
 
 **Sources:** [reversible proof](../science/reversible_proof.md).
 
-### M17 — Paying for every population
+### M17 — Completing the reversible proof
 
 **Central question:** Why are the remaining coefficients nonnegative?
 
-**Understanding target:** Combine propagated detailed balance, PPT inequalities, and no-jump diagonal weights without division by zero.
+**Understanding target:** Combine propagated detailed balance, PPT inequalities, and no-jump diagonal weights to prove separability. Account for vanishing transfer probabilities and when a shared onset can be infinite.
 
 **Dependencies:** M06, M14, M16
 
 **Connection and story role:** Completes the constructive separability proof.
 
-**Sources:** [reversible proof](../science/reversible_proof.md).
+**Sources:** [reversible proof](../science/reversible_proof.md); [scope](../science/limitations.md).
 
-### M18 — The all-time reversible theorem
+### M18 — The normalized circulant Choi slice
 
-**Central question:** When can the shared threshold be infinite?
+**Central question:** What data specify the two-qutrit states in the cycle calculation?
 
-**Understanding target:** State the theorem with its full assumptions and explain irreducible and disconnected examples.
+**Understanding target:** Identify the three cyclic populations, the real aligned coherence, and the physical positivity interval $`-p_0/2\le c\le p_0`$.
 
-**Dependencies:** M12, M17
+**Dependencies:** M09, M13, M14
 
-**Connection and story role:** Integrates the first part of the scientific contribution.
+**Connection and story role:** Identifies the state family whose separability can be decided exactly.
 
-**Sources:** [model](../science/model.md); [boundaries](../science/limitations.md).
+**Sources:** [separability criterion](../science/separability.md).
 
-### M19 — A circulating three-level system
+### M19 — A product mixture from two inequalities
 
-**Central question:** How can bias be changed without changing the outgoing rate?
+**Central question:** Why do the PPT and realignment tests together decide separability on this slice?
 
-**Understanding target:** Interpret forward and backward rates, normalized bias, stationary current and uniform dephasing.
+**Understanding target:** Follow the finite product average that splits positive coherence between a uniform component and a two-level component. Use the population inequalities to justify the residual basis products, and explain how a sign change in the pair construction handles negative coherence.
 
-**Dependencies:** M07, M08, M18
+**Dependencies:** M10, M11, M14, M18
 
-**Connection and story role:** Introduces the matched counterfamily.
+**Connection and story role:** Supplies the exact separability certificate used for every point of the dynamical example.
 
-**Sources:** [cycle](../science/cycle.md); Book 4.1 / preprint 5.1.
+**Sources:** [product decomposition](../science/separability.md); [worked tutorial](TUTORIAL.md).
 
-### M20 — Fixed damping, moving phases
+### M20 — A circulating three-level system
 
-**Central question:** Which population diagnostics stay unchanged under bias?
+**Central question:** How can the steady current change while the damping scales stay fixed?
 
-**Understanding target:** Distinguish singular-value decay from the full complex spectrum and derive the cyclic propagator.
+**Understanding target:** Interpret forward and backward rates, normalized bias and uniform dephasing. Derive the cyclic propagator and identify the fixed singular values and changing Fourier phases.
 
-**Dependencies:** M13, M19
+**Dependencies:** M07, M08, M13, M18
 
 **Connection and story role:** Locates precisely what the comparison controls.
 
-**Sources:** [cycle](../science/cycle.md); Book 1.2 / preprint 2.2.
+**Sources:** [cycle](../science/cycle.md); Book 1.2, 4.1 / preprint 2.2, 5.1.
 
 ### M21 — The cyclic PPT determinant
 
 **Central question:** How do directed transfer probabilities affect PPT?
 
-**Understanding target:** Reduce the general pair inequalities to one determinant and interpret its sign.
+**Understanding target:** Reduce the general pair inequalities to one determinant and use the monotonicity of $`p_1p_2/c^2`$ to identify its unique crossing.
 
 **Dependencies:** M14, M20
 
@@ -260,63 +260,63 @@ Book and preprint references always mean the one selected **Rivas–Huelga** anc
 
 **Sources:** [cycle](../science/cycle.md).
 
-### M22 — A bias-independent witness
+### M22 — The bias-independent realignment crossing
 
 **Central question:** Why does realignment ignore the circulation phase here?
 
-**Understanding target:** Identify its population and scalar coherence blocks and use the trace-norm witness in the correct direction.
+**Understanding target:** Identify the population block and the six scalar coherence blocks. Derive the scalar root $`E+3c=1`$ and recover both thresholds of the reversible reference.
 
-**Dependencies:** M11, M20
+**Dependencies:** M11, M17, M20, M21
 
-**Connection and story role:** Provides a separate entanglement certificate with fixed damping.
+**Connection and story role:** Gives the benchmark time $`t_*`$ shared by the realignment test at every bias.
 
 **Sources:** [cycle](../science/cycle.md); [attribution](../references/RELATED_WORK.md).
 
-### M23 — The reversible reference crossing
+### M23 — The exact entanglement-breaking time
 
-**Central question:** Why does one scalar root locate both thresholds at zero bias?
+**Central question:** Why does the circulating channel break entanglement at the later crossing?
 
-**Understanding target:** Explain monotonicity, the reference equation and why reversibility is needed to turn a PPT crossing into an EB result.
+**Understanding target:** Apply the static separability theorem along the trajectory and derive $`t_{\rm EB}=\max\{t_{\rm PPT},t_*\}`$.
 
-**Dependencies:** M18, M21, M22
+**Dependencies:** M19, M21, M22
 
-**Connection and story role:** Sets an exact benchmark rather than an assumed separability time.
+**Connection and story role:** Converts the two diagnostic crossings into an exact channel threshold.
 
-**Sources:** [cycle](../science/cycle.md).
+**Sources:** [separability criterion](../science/separability.md); [cycle](../science/cycle.md).
 
-### M24 — Strict positivity opens an interval
+### M24 — Comparing the two crossings
 
-**Central question:** Why does every nonzero bias suffice?
+**Central question:** What decides whether a bound-entangled interval opens?
 
-**Understanding target:** Use the factored determinant difference, dephasing bound and continuity to establish a nonempty PPT-entangled interval.
+**Understanding target:** Read the sign of the factored determinant at $`t_*`$ and relate that sign to the order of the two crossings at nonzero bias.
 
 **Dependencies:** M21, M22, M23
 
-**Connection and story role:** Connects microscopic circulation to the main contrasting effect.
+**Connection and story role:** Reduces the dephasing dependence of the interval to a scalar sign test.
 
 **Sources:** [cycle](../science/cycle.md).
 
-### M25 — The weak-current law
+### M25 — The critical dephasing curve
 
-**Central question:** Why is the leading opening quadratic without extra dephasing?
+**Central question:** At what dephasing rate does the bound-entangled interval close?
 
-**Understanding target:** Read the even expansion and implicit-function derivative, retaining the remainder and normalized units.
+**Understanding target:** Explain the unique $`\gamma_c(\eta)`$ for each nonzero bias, why it exceeds one half, and how the three regimes place both thresholds relative to $`t_*`$.
 
 **Dependencies:** M23, M24
 
-**Connection and story role:** Quantifies how the certified effect vanishes near reversibility.
+**Connection and story role:** Identifies when current changes the type of surviving entanglement and when it delays entanglement loss.
 
 **Sources:** [cycle](../science/cycle.md); [verification](../verification/README.md).
 
-### M26 — A delicate endpoint
+### M26 — Weak current near a changing crossing
 
-**Central question:** What changes at dephasing equal to one half?
+**Central question:** Why can the time gap be quadratic or quartic in the bias?
 
-**Understanding target:** Explain why the quadratic factor vanishes while strict positivity survives at fourth order, and why double precision can miss tiny gaps.
+**Understanding target:** Track the even-in-bias expansion, compare zero dephasing with $`\gamma=1/2`$, and distinguish the order of the time gap from the shift of the critical curve.
 
 **Dependencies:** M24, M25
 
-**Connection and story role:** Identifies a load-bearing limiting case instead of extrapolating a coefficient.
+**Connection and story role:** Shows how the threshold comparison becomes small near reversibility and motivates high-precision evaluation.
 
 **Sources:** [cycle](../science/cycle.md); [verification](../verification/README.md).
 
@@ -348,9 +348,9 @@ Book and preprint references always mean the one selected **Rivas–Huelga** anc
 
 **Central question:** How can implementation errors be separated from proof and priority?
 
-**Understanding target:** Interpret independent GKSL reconstruction, Gram checks and high-precision scaling tests, without treating finite agreement as universal proof.
+**Understanding target:** Interpret independent generator reconstruction, checks of the product decomposition and high-precision threshold comparisons. Identify which statements follow from analytic proofs and which calculations verify examples.
 
-**Dependencies:** M17, M24, M26, M28
+**Dependencies:** M17, M19, M25, M26, M28
 
 **Connection and story role:** Connects the theorem and example to reproducible evidence and its limits.
 
@@ -358,11 +358,11 @@ Book and preprint references always mean the one selected **Rivas–Huelga** anc
 
 ### M30 — The complete physical story
 
-**Central question:** What does circulation change, and what remains unproved?
+**Central question:** What changes in the channel when circulation and dephasing vary together?
 
-**Understanding target:** Integrate reversibility, matched damping, loss of distillability and residual bound entanglement while withholding an exact biased EB time or a lifetime-advantage claim.
+**Understanding target:** Integrate the reversible proof, matched damping, the exact PPT and entanglement-breaking times, and when two-way quantum communication is possible. Interpret the late threshold above the critical curve in the specified channel model.
 
-**Dependencies:** M18, M24, M25, M26, M28, M29
+**Dependencies:** M17, M23, M25, M26, M28, M29
 
 **Connection and story role:** Synthesizes the whole contribution and its boundaries.
 

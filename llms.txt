@@ -6,9 +6,10 @@ Science route:
 - science/README.md: connected reading order and physical question.
 - science/model.md: resolved rank-one jumps; Hermitian diagonal dephasing; column convention; output-first Choi normalization; exact theorem and onset definitions.
 - science/reversible_proof.md: nonnegative Gaussian Gram factors, stationary-distribution tilt, diagonal twirl and nonnegative residual.
-- science/cycle.md: matched outgoing rates and damping; circulation; exact PPT/realignment expressions; strict interval and weak-current law.
+- science/separability.md: analytic product decomposition and exact joint PPT/realignment criterion for the real-coherence cyclic qutrit slice.
+- science/cycle.md: matched damping, exact entanglement-breaking time, critical dephasing, and weak-current expansions.
 - science/operational.md: two-qubit projection and adaptive PPT converse for the sign of two-way assisted quantum capacity.
-- science/limitations.md: unresolved sectors, infinite-onset examples, unsupported exact biased EB time and lifetime claims.
+- science/limitations.md: unresolved sectors, infinite-onset examples, threshold scope and interpretation.
 
 Learning route:
 - learning/README.md and learning/TUTORIAL.md: physical explanation and worked qutrit example.
@@ -20,4 +21,4 @@ Attribution and checks:
 - verification/README.md, check_science.py, results.json: independent GKSL/Choi computation, reversible test family and high-precision limits.
 - verification/check_structure.py: local navigation and milestone integrity; not proof or hosted-rendering verification.
 
-Essential distinctions: J has trace d; rho=J/d has trace one. PPT is not generally separability. Realignment <=1 does not prove separability. The full complex population spectrum is not fixed by fixing singular values. Q2 denotes two-way-assisted quantum capacity, not private or unassisted capacity. The exact biased EB onset is not proved. Numerical tests are finite evidence, not universal proof. No personal coaching data are required to read or use this repository.
+Essential distinctions: J has trace d; rho=J/d has trace one. PPT is not generally separability. Joint PPT and realignment suffice only on the specified qutrit slice. The full complex population spectrum is not fixed by fixing singular values. Q2 denotes two-way-assisted quantum capacity, not private or unassisted capacity. Numerical tests are finite evidence, not universal proof. No personal coaching data are required to read or use this repository.

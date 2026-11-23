@@ -1,4 +1,4 @@
-"""Independent GKSL, Choi, reversible-decomposition, and asymptotic checks.
+"""Independent GKSL, Choi, separable-decomposition, and asymptotic checks.
 
 Run from any directory: python verification/check_science.py
 Results are written beside this script. Finite tests do not prove the theorems.
@@ -6,6 +6,7 @@ Results are written beside this script. Finite tests do not prove the theorems.
 from __future__ import annotations
 import json
 import platform
+from itertools import product
 from pathlib import Path
 import numpy as np
 import scipy
@@ -129,6 +130,155 @@ def check_cycles() -> dict:
     return {'cases':count,'max_choi_error':max_choi,'max_realignment_error':max_realign,'max_ppt_eigenvalue_error':max_ppt,'max_population_singular_value_error':max_singular,'example':example,'zero_dephasing_roots':roots}
 
 
+def product_twirl(left: np.ndarray, right: np.ndarray) -> np.ndarray:
+    """Average all third-root local phases and simultaneous cyclic shifts."""
+    average = np.zeros((9, 9), dtype=complex)
+    phase_vectors = np.exp(2j*np.pi*np.array(list(product(range(3), repeat=3)))/3)
+    for shift in range(3):
+        shifted_left = np.roll(left, shift)
+        shifted_right = np.roll(right, shift)
+        for phases in phase_vectors:
+            ket = np.kron(phases*shifted_left, phases.conj()*shifted_right)
+            average += np.outer(ket, ket.conj())
+    return average/(3*len(phase_vectors))
+
+
+def bell_line(shift: int, phase: int) -> np.ndarray:
+    labels = np.arange(3)
+    ket = np.zeros(9, dtype=complex)
+    ket[3*((labels+shift) % 3)+labels] = np.exp(2j*np.pi*phase*labels/3)/np.sqrt(3)
+    return np.outer(ket, ket.conj())
+
+
+def bell_mixture(p: np.ndarray, c: float) -> np.ndarray:
+    """Build the target from all nine Bell vectors independently of twirling."""
+    rho = np.zeros((9, 9), dtype=complex)
+    for shift in range(3):
+        for phase in range(3):
+            weight = p[shift]/3
+            if shift == 0:
+                weight += (2 if phase == 0 else -1)*c/3
+            rho += weight*bell_line(shift, phase)
+    return rho
+
+
+def separable_cycle_state(p: np.ndarray, c: float) -> tuple[np.ndarray, float]:
+    """Rebuild a proposed separable state using explicit product averages."""
+    uniform_share = max(2*c-p[0], 0)
+    pair_share = abs(c)-uniform_share
+    residual = p-uniform_share
+    result = np.zeros((9, 9), dtype=complex)
+    if uniform_share > 0:
+        uniform_ket = np.full(3, 1/np.sqrt(3))
+        result += 3*uniform_share*product_twirl(uniform_ket, uniform_ket)
+    if pair_share > 0:
+        # Saturate the larger budget to avoid magnifying cancellation near a zero smaller budget.
+        ratio = residual[1]/pair_share if residual[1] >= residual[2] else pair_share/residual[2]
+        large = np.sqrt(ratio/(1+ratio))
+        small = np.sqrt(1/(1+ratio))
+        left = np.array([small, large, 0])
+        right = np.array([large, np.sign(c)*small, 0])
+        result += pair_share*(2+ratio+1/ratio)*product_twirl(left, right)
+        residual -= pair_share*np.array([2, ratio, 1/ratio])
+    for shift, weight in enumerate(residual):
+        for label in range(3):
+            index = 3*((label+shift) % 3)+label
+            result[index, index] += weight/3
+    return result, float(residual.min())
+
+
+def check_static_slice() -> dict:
+    rng = np.random.default_rng(20261123)
+    edge_cases = np.array([
+        [0, 0, 1], [0, .5, .5], [1, 0, 0], [1/3, 1/3, 1/3],
+        [.2, .2, .6], [.6, .2, .2], [.5, .2, .3], [.4, .3, .3],
+    ])
+    populations = np.vstack((edge_cases, rng.dirichlet(np.ones(3), size=128)))
+    max_error = 0.
+    min_residual = 0.
+    sign_cases = {'negative': 0, 'zero': 0, 'positive': 0}
+    outside = {'ppt': 0, 'realignment_with_ppt': 0}
+    for p in populations:
+        e = np.hypot((3*p[0]-1)/2, np.sqrt(3)*(p[1]-p[2])/2)
+        ppt_ceiling = np.sqrt(p[1]*p[2])
+        realignment_ceiling = (1-e)/3
+        lower = -min(p[0]/2, ppt_ceiling)
+        upper = min(p[0], ppt_ceiling, realignment_ceiling)
+        for c in (lower, lower/2, 0., upper/2, upper):
+            target = bell_mixture(p, c)
+            rebuilt, residual = separable_cycle_state(p, c)
+            max_error = max(max_error, float(np.max(np.abs(rebuilt-target))))
+            min_residual = min(min_residual, residual)
+            require(np.linalg.eigvalsh(target)[0] > -2e-12, 'static positivity')
+            require(np.linalg.eigvalsh(partial_transpose(target, 3))[0] > -2e-12, 'static PPT')
+            require(np.linalg.svd(realignment(target, 3), compute_uv=False).sum() < 1+2e-12, 'static realignment')
+            sign = 'positive' if c > 0 else 'negative' if c < 0 else 'zero'
+            sign_cases[sign] += 1
+        if ppt_ceiling+1e-8 < p[0]:
+            rho = bell_mixture(p, (ppt_ceiling+p[0])/2)
+            require(np.linalg.eigvalsh(partial_transpose(rho, 3))[0] < -1e-10, 'static outside PPT')
+            outside['ppt'] += 1
+        physical_ppt_ceiling = min(p[0], ppt_ceiling)
+        if realignment_ceiling+1e-8 < physical_ppt_ceiling:
+            rho = bell_mixture(p, (realignment_ceiling+physical_ppt_ceiling)/2)
+            require(np.linalg.eigvalsh(partial_transpose(rho, 3))[0] >= -2e-12, 'static PPT-entangled example')
+            require(np.linalg.svd(realignment(rho, 3), compute_uv=False).sum() > 1+1e-10, 'static outside realignment')
+            outside['realignment_with_ppt'] += 1
+    require(max_error < 2e-12 and min_residual >= -2e-12, 'static product decomposition residual')
+    return {'cases_by_coherence_sign':sign_cases,'outside_cases':outside,'max_reconstruction_error':max_error,'minimum_diagonal_residual':min_residual}
+
+
+def crossover_dephasing(eta: float) -> float:
+    def crossover(t):
+        return 2*np.exp(-1.5*t)*(1+np.cos(np.sqrt(3)*eta*t/2))-1
+
+    time = brentq(crossover, .01, 2., xtol=1e-14)
+    return -np.log((1-np.exp(-1.5*time))/3)/time-1
+
+
+def check_exact_onsets() -> dict:
+    regimes = {'bound_interval': 0, 'coincident': 0, 'delayed': 0}
+    crossover = []
+    examples = []
+    max_error = 0.
+    min_residual = 0.
+    for eta in (-1., -.5, -.1, 0., .1, .5, 1.):
+        gammas = [0., .5, 1., 2., 10.]
+        critical = crossover_dephasing(eta)
+        if eta != 0:
+            crossover.append({'eta':eta,'critical_gamma':critical})
+            gammas.extend((critical-.05, critical, critical+.05))
+        q = cycle_q(eta)
+        for gamma in gammas:
+            noise = np.sqrt(gamma)*np.eye(3)
+            t_ppt = brentq(lambda t: determinant(eta, gamma, t), .001, 4., xtol=1e-14)
+            t_star = brentq(lambda t: np.exp(-1.5*t)+3*np.exp(-(1+gamma)*t)-1, .001, 4., xtol=1e-14)
+            gap = t_star-t_ppt
+            if eta == 0 or abs(gamma-critical) < 1e-12:
+                require(abs(gap) < 2e-12, 'onsets coincide at the crossover or zero bias')
+                regimes['coincident'] += 1
+            elif gamma < critical:
+                require(gap > 0, 'bound interval below crossover')
+                regimes['bound_interval'] += 1
+            else:
+                require(gap < 0, 'current delays the coincident thresholds above crossover')
+                regimes['delayed'] += 1
+            t_eb = max(t_ppt,t_star)
+            rho = choi_direct(q, noise, np.zeros(3), t_eb)
+            p = expm(q*t_eb)[:, 0]
+            rebuilt, residual = separable_cycle_state(p, np.exp(-(1+gamma)*t_eb))
+            max_error = max(max_error, float(np.max(np.abs(rebuilt-rho))))
+            min_residual = min(min_residual, residual)
+            rho_before = choi_direct(q, noise, np.zeros(3), t_eb-1e-6)
+            before_pt = np.linalg.eigvalsh(partial_transpose(rho_before, 3))[0]
+            before_realignment = np.linalg.svd(realignment(rho_before, 3), compute_uv=False).sum()
+            require(before_pt < -1e-10 or before_realignment > 1+1e-10, 'direct witness before EB onset')
+            if eta == 1 and gamma in (0., .5, 1.):
+                examples.append({'eta':eta,'gamma':gamma,'t_star':t_star,'t_ppt':t_ppt,'t_eb':t_eb})
+    require(max_error < 2e-12 and min_residual >= -2e-12, 'dynamical product decomposition residual')
+    return {'regime_counts':regimes,'crossover':crossover,'examples':examples,'max_reconstruction_error':max_error,'minimum_diagonal_residual':min_residual}
+
+
 def check_reversible() -> dict:
     rng = np.random.default_rng(20261030)
     residual = balance_residual = kernel_residual = 0.0
@@ -196,7 +346,7 @@ def check_weak_bias() -> dict:
 
 
 def main() -> None:
-    result={'status':'pass','environment':{'python':platform.python_version(),'numpy':np.__version__,'scipy':scipy.__version__,'mpmath':mp.__version__},'cycle':check_cycles(),'reversible':check_reversible(),'weak_bias':check_weak_bias(),'limits':'Finite-dimensional numerical checks and high-precision expansions; not a universal proof or separability decision algorithm.'}
+    result={'status':'pass','environment':{'python':platform.python_version(),'numpy':np.__version__,'scipy':scipy.__version__,'mpmath':mp.__version__},'cycle':check_cycles(),'static_bell_slice':check_static_slice(),'exact_cycle_onsets':check_exact_onsets(),'reversible':check_reversible(),'weak_bias':check_weak_bias(),'limits':'Finite decomposition, threshold, and high-precision checks support the analytical proofs in science/.'}
     destination=Path(__file__).with_name('results.json')
     destination.write_text(json.dumps(result,indent=2)+'\n')
     print(json.dumps(result,indent=2))
