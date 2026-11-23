@@ -16,12 +16,14 @@ Consider the time-independent Lindblad generator, with $`\hbar=1`$,
 
 Here $`H`$ and every $`V_\alpha`$ are Hermitian and diagonal. Distinct transitions have separate rank-one jump operators; combining equal-frequency transitions into one coherent jump is not the same model. The diagonal real noise vector at level $`i`$ is $`v_i=((V_\alpha)_{ii})_{\alpha=1}^m`$.
 
+For real noise vectors, $`s(x,y)=\sum_{\alpha=1}^m(x_\alpha-y_\alpha)^2`$ is their squared Euclidean separation.
+
 Applying the generator to matrix units gives the population propagator $`P(t)=e^{tQ}`$ and, for $`i\ne j`$,
 
 ```math
 \begin{aligned}
 \Phi_t(E_{ij})&=e^{-it(H_{ii}-H_{jj})}c_{ij}(t)E_{ij},\\
-c_{ij}(t)&=\exp\!\left[-\frac t2(q_i+q_j)-\frac t2\|v_i-v_j\|^2\right].
+c_{ij}(t)&=\exp\!\left[-\frac t2(q_i+q_j)-\frac t2s(v_i,v_j)\right].
 \end{aligned}
 ```
 

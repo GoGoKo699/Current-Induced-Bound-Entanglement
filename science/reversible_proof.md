@@ -10,19 +10,19 @@ It follows either by exponentiating the generator's weighted symmetry or termwis
 
 ## 1. Nonnegative Gram factors
 
-Put $`D_i=e^{-tq_i/2}`$ and extend the coherence matrix to its no-jump diagonal:
+Use the squared Euclidean separation $`s(x,y)`$ defined in the [model](model.md#resolved-transitions). Put $`D_i=e^{-tq_i/2}`$ and extend the coherence matrix to its no-jump diagonal:
 
 ```math
-C_{ij}=D_iD_j e^{-t\|v_i-v_j\|^2/2},\qquad C_{ii}=e^{-tq_i}.
+C_{ij}=D_iD_j e^{-ts(v_i,v_j)/2},\qquad C_{ii}=e^{-tq_i}.
 ```
 
 For $`t>0`$ and $`m>0`$, define nonnegative normalized Gaussian functions
 
 ```math
-f_i(x)=\left(\frac{2t}{\pi}\right)^{m/4}e^{-t\|x-v_i\|^2}.
+f_i(x)=\left(\frac{2t}{\pi}\right)^{m/4}e^{-ts(x,v_i)}.
 ```
 
-Completing the square gives $`\int f_i(x)f_j(x)\,dx=e^{-t\|v_i-v_j\|^2/2}`$. Thus $`C`$ is an integral of outer products of nonnegative vectors. The finite-dimensional completely positive **matrix cone** is closed, so
+Completing the square gives $`\int f_i(x)f_j(x)\,dx=e^{-ts(v_i,v_j)/2}`$. Thus $`C`$ is an integral of outer products of nonnegative vectors. The finite-dimensional completely positive **matrix cone** is closed, so
 
 ```math
 C=\sum_{k=1}^{K}a^{(k)}(a^{(k)})^T,\qquad a^{(k)}\ge0
